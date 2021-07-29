@@ -10,8 +10,16 @@ https://ieeexplore.ieee.org/abstract/document/9103247
 The pytorch framework used in this code. Instead of the TensorFlow framework used in the article, modify it yourself if necessary.  
 
 本代码采用的pytorch框架。而不是文章采用的TensorFlow框架，如有需要自行修改。  
+RSSAN-Hyperspectral-Image  
+  --Dateset  
+  --function  
+  --model  
+  --resulit  
+  --main.py  
+  --README.md  
+  --train.log  
 
-environment：
+environment：  
   python 3.8.5  
   numpy 1.19.2  
   scikit-learn 0.23.2  
