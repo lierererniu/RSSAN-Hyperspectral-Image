@@ -40,7 +40,7 @@ Parameter setting:
   epoch: 200  
   patch_size: 17  
   train batch_size: 16  
-  test batch_size: 100  
+  test batch_size: 16 
   lr: IN,PU 0.0003 KSC 0.0001  
   optimizer:RMSprop  
   depth:PU 8 IN,KSC 32  
