@@ -3,12 +3,12 @@ import copy
 import os
 import time
 import torch.backends.cudnn
-from dataprocess import load_dataset
-from train import *
+from function.dataprocess import load_dataset
+from function.train import *
 import model.network as RSSAN
 import torch
 import numpy as np
-from module import Mylogger, plot_loss_and_accuracy, outputstr, set_seed, mkdir
+from function.module import Mylogger, plot_loss_and_accuracy, outputstr, set_seed, mkdir
 from torchsummary import summary
 
 if __name__ == '__main__':
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_percent', default=0.2, type=float, help='samples of train set')
     parser.add_argument('--test_percent', default=0.675, type=float, help='samples of test set')
     parser.add_argument('--val_percent', default=0.125, type=float, help='samples of val set')
-    parser.add_argument('--ab_study', default='RSSAN-None', type=str, help='wo， RSSAN-None, RSSAN-SE, RSSAN-SA, '
+    parser.add_argument('--ab_study', default='', type=str, help='wo， RSSAN-None, RSSAN-SE, RSSAN-SA, '
                                                                            'RSSAN-SA-SE')
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -127,4 +127,3 @@ if __name__ == '__main__':
     outputstr(result_dir, best_records, confusion, classification, evaluate, each_acc)
     print('OA, AA, kappa:', evaluate)
     print('each-acc：', each_acc)
-
