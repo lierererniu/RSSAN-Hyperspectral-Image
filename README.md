@@ -33,6 +33,9 @@ The running results are saved in the result folder.
 
 运行结果均保存在result文件夹中。  
 
+运行方法  
+python main.py
+
 
 Parameter setting:  
 参数设置：  
