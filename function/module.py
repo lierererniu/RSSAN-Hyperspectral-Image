@@ -7,6 +7,9 @@ from cmreslogging.handlers import CMRESHandler
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import torch
+import random
+import torch.backends.cudnn
 
 line_colors = ['r', 'g', 'b', 'c', 'm', 'y', 'k', 'saddlebrown', 'orange',
                'yellow', 'slateblue']
@@ -136,6 +139,7 @@ def plot_loss_and_accuracy(graph_data, save_dir, title=None, show=False):
         plt.show()
     plt.close()
 
+
 def mkdir(path):
     # 判断目录是否存在
     folder = os.path.exists(path)
@@ -148,7 +152,7 @@ def mkdir(path):
     return path
 
 
-def outputstr(savepath, best_record, confusion, classfication):
+def outputstr(savepath, best_record, confusion, classfication,  evaluate, each_acc):
     sign = 100
     blank1 = 5
     blank2 = sign // 2 - 10 // 2
@@ -162,8 +166,9 @@ def outputstr(savepath, best_record, confusion, classfication):
                            'val_acc:' + str(best_record['val_acc']))
     s5 = '\n%s\n%s%s\n%s\n' % ('#' * sign, ' ' * blank2, 'Accuracies',
                                '#' * sign)
-
     s6 = classfication
+    s7 = '\n%s%s\n' % ('OA, AA, kappa:', str(evaluate))
+    s8 = '\n%s%s\n' % ('each-acc:', str(each_acc))
     savepath = savepath + '/' + 'result.txt'
     with open(savepath, 'w') as f:
         f.write(s1)
@@ -172,5 +177,18 @@ def outputstr(savepath, best_record, confusion, classfication):
         f.write(s4)
         f.write(s5)
         f.write(s6)
+        f.write(s7)
+        f.write(s8)
         f.write('\ntest_confusion_matrix: \n')
         np.savetxt(f, confusion, fmt='%5d', newline='\n')
+
+
+def set_seed(seed=1):  # seed的数值可以随意设置，本人不清楚有没有推荐数值
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False

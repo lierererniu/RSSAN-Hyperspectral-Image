@@ -190,7 +190,7 @@ def load_dataset(path, name, batch_size, window_size, test_batch):
     val_hyper = CommonDataset((np.transpose(val_x, (0, 3, 1, 2)).astype("float32"), val_y))
     train_loader = torch.utils.data.DataLoader(train_hyper, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_hyper, batch_size=test_batch, shuffle=False)
-    val_loader = torch.utils.data.DataLoader(val_hyper, batch_size=test_batch, shuffle=True)
+    val_loader = torch.utils.data.DataLoader(val_hyper, batch_size=batch_size, shuffle=True)
     del test_hyper, val_hyper, train_x, test_x, train_y, test_y, val_x, val_y
     return train_loader, test_loader, val_loader, kinds, bands, train_hyper.data.shape[1:]
 
